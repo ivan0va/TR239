@@ -91,7 +91,8 @@ public class Main {
         x1.setBounds(20,255,25,25);
         butPanel.add(x1);
         final JTextField y1 = new JTextField();
-        y1.setBounds(60,255,25,25);
+        y1.setBounds(60,255,25
+                ,25);
         butPanel.add(y1);
         final JTextField x2 = new JTextField();
         x2.setBounds(20,310,25,25);
