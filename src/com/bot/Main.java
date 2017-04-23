@@ -245,63 +245,67 @@ public class Main {
             Point c = new Point (X3, Y3);
             Point d = new Point (X4, Y4);
             Square s = new Square(a, b, c, d);
-            if ( s.areSidesEqual() && ((X3-X1)/(X2-X1)!=(Y3-Y1)/(Y2-Y1))&&((X4-X1)/(X2-X1)!=(Y4-Y1)/(Y2-Y1))) {
-            Point b1 = new Point(X1, Y1);
-                                points.add(b1);
-                                b1.setBounds(b1.x,b1.y,b1.x+3,b1.y+3);
-                                pointpane.add(b1);
-                                pointpane.revalidate();
-                                pointpane.repaint();
-            Point b2 = new Point(X2, Y2);
-                                points.add(b2);
-                                b2.setBounds(b2.x,b2.y,b2.x+3,b2.y+3);
-                                pointpane.add(b2);
-                                pointpane.revalidate();
-                                pointpane.repaint();
-            Point b3 = new Point(X3, Y3);
-                                points.add(b3);
-                                b3.setBounds(b3.x,b3.y,b3.x+3,b3.y+3);
-                                pointpane.add(b3);
-                                pointpane.revalidate();
-                                pointpane.repaint();
-            Point b4 = new Point(X4, Y4);
-                                points.add(b4);
-                                b4.setBounds(b4.x,b4.y,b4.x+3,b4.y+3);
-                                pointpane.add(b4);
-                                pointpane.revalidate();
-                                pointpane.repaint();
+            if (s.areSidesEqual() ) {
+                    //if ( ((X1-X2)!= 0) && ((Y1-Y2)!= 0)  &&((X3-X1)/(X2-X1)!=(Y3-Y1)/(Y2-Y1))&&((X4-X1)/(X2-X1)!=(Y4-Y1)/(Y2-Y1))||(((X1-X2)== 0) && ((Y1-Y2)== 0) )) {
+                Point b1 = new Point(X1, Y1);
+                points.add(b1);
+                b1.setBounds(b1.x, b1.y, b1.x + 3, b1.y + 3);
+                pointpane.add(b1);
+                pointpane.revalidate();
+                pointpane.repaint();
+                Point b2 = new Point(X2, Y2);
+                points.add(b2);
+                b2.setBounds(b2.x, b2.y, b2.x + 3, b2.y + 3);
+                pointpane.add(b2);
+                pointpane.revalidate();
+                pointpane.repaint();
+                Point b3 = new Point(X3, Y3);
+                points.add(b3);
+                b3.setBounds(b3.x, b3.y, b3.x + 3, b3.y + 3);
+                pointpane.add(b3);
+                pointpane.revalidate();
+                pointpane.repaint();
+                Point b4 = new Point(X4, Y4);
+                points.add(b4);
+                b4.setBounds(b4.x, b4.y, b4.x + 3, b4.y + 3);
+                pointpane.add(b4);
+                pointpane.revalidate();
+                pointpane.repaint();
 
-                                Line temp = new Line(b1, b2);
-                                lines.add(temp);
-                                pointpane.add(temp);
-                                temp.setBounds(2, 2, frame.getWidth(), frame.getHeight());
-                                pointpane.revalidate();
-                                pointpane.repaint();
-            Line temp1 = new Line(b3, b2);
-            lines.add(temp1);
-            pointpane.add(temp1);
-            temp1.setBounds(2, 2, frame.getWidth(), frame.getHeight());
-            pointpane.revalidate();
-            pointpane.repaint();
-            Line temp2 = new Line(b4, b3);
-            lines.add(temp2);
-            pointpane.add(temp2);
-            temp2.setBounds(2, 2, frame.getWidth(), frame.getHeight());
-            pointpane.revalidate();
-            pointpane.repaint();
-            Line temp3 = new Line(b1, b4);
-            lines.add(temp3);
-            pointpane.add(temp3);
-            temp3.setBounds(2, 2, frame.getWidth(), frame.getHeight());
-            pointpane.revalidate();
-            pointpane.repaint();
-                            }
+                Line temp = new Line(b1, b2);
+                lines.add(temp);
+                pointpane.add(temp);
+                temp.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                pointpane.revalidate();
+                pointpane.repaint();
+                Line temp1 = new Line(b3, b2);
+                lines.add(temp1);
+                pointpane.add(temp1);
+                temp1.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                pointpane.revalidate();
+                pointpane.repaint();
+                Line temp2 = new Line(b4, b3);
+                lines.add(temp2);
+                pointpane.add(temp2);
+                temp2.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                pointpane.revalidate();
+                pointpane.repaint();
+                Line temp3 = new Line(b1, b4);
+                lines.add(temp3);
+                pointpane.add(temp3);
+                temp3.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                pointpane.revalidate();
+                pointpane.repaint();
 
-            System.out.println("Добавлен квадрат");
-            System.out.println("Точка 1: x =" + x1.getText() + ";" + "y=" + y1.getText());
-            System.out.println("Точка 2: x =" + x2.getText() + ";" + "y=" + y2.getText());
-            System.out.println("Точка 3: x =" + x3.getText() + ";" + "y=" + y3.getText());
-            System.out.println("Точка 4: x =" + x4.getText() + ";" + "y=" + y4.getText());
+
+                System.out.println("Добавлен квадрат");
+                System.out.println("Точка 1: x =" + x1.getText() + ";" + "y=" + y1.getText());
+                System.out.println("Точка 2: x =" + x2.getText() + ";" + "y=" + y2.getText());
+                System.out.println("Точка 3: x =" + x3.getText() + ";" + "y=" + y3.getText());
+                System.out.println("Точка 4: x =" + x4.getText() + ";" + "y=" + y4.getText());
+            }
+            else
+                System.out.println ("Леся алкаш");
         }
         });}
 
