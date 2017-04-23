@@ -271,6 +271,9 @@ public class Main {
                 pointpane.add(b4);
                 pointpane.revalidate();
                 pointpane.repaint();
+                Point b5 = new Point(X4, Y4);
+                if (Math.sqrt((c.x - a.x)*(c.x - a.x) +(c.y - a.y)*(c.y - a.y) )> Math.sqrt((b.x - a.x)*(b.x - a.x) + (b.y - a.y)*(b.y - a.y))) {
+
 
                 Line temp = new Line(b1, b2);
                 lines.add(temp);
@@ -303,9 +306,9 @@ public class Main {
                 System.out.println("Точка 2: x =" + x2.getText() + ";" + "y=" + y2.getText());
                 System.out.println("Точка 3: x =" + x3.getText() + ";" + "y=" + y3.getText());
                 System.out.println("Точка 4: x =" + x4.getText() + ";" + "y=" + y4.getText());
-            }
+            }}
             else
-                System.out.println ("Леся алкаш");
+                System.out.println ("hi");
         }
         });}
 
