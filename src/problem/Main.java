@@ -1,4 +1,5 @@
-package com.bot.problem;
+package problem;
+import com.bot.Point;
 
 /**
  * Created by ivanovama.18 on 17.04.2017.
@@ -8,15 +9,15 @@ public class Main {
     public static void main(String args[ ]) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        Point [] a = new Point[n];
+        Point [] a = new com.bot.Point[n];
         for(int i=0;i<n;i++) {
-            a[i] = new Point(sc.nextDouble(), sc.nextDouble());
+            a[i] = new com.bot.Point(sc.nextInt(), sc.nextInt());
         }
         double maxPerimeter = 0;
-        Point max1=new Point();
-        Point max2=new Point();
-        Point max3=new Point();
-        Point max4=new Point();
+        Point max1=new com.bot.Point();
+        Point max2=new com.bot.Point();
+        Point max3=new com.bot.Point();
+        Point max4=new com.bot.Point();
 
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
@@ -24,13 +25,13 @@ public class Main {
                     for (int t = k + 1; t < n; t++) {
 
                         Square s = new Square(a[i], a[j], a[k], a[t]);
-                        if ( s.areSidesEqual() && s.areNotOnOneLine()) {
+                        if ( s.areSidesEqual() ) {//&& s.areNotOnOneLine() {
                             if (s.getPerimeter() > maxPerimeter) {
                                 maxPerimeter = s.getPerimeter();
-                                max1 = new Point(s.a.x, s.a.y);
-                                max2 = new Point(s.b.x, s.b.y);
-                                max3 = new Point(s.c.x, s.c.y);
-                                max4 = new Point(s.d.x, s.d.y);
+                                max1 = new com.bot.Point(s.a.x, s.a.y);
+                                max2 = new com.bot.Point(s.b.x, s.b.y);
+                                max3 = new com.bot.Point(s.c.x, s.c.y);
+                                max4 = new com.bot.Point(s.d.x, s.d.y);
                             }
                         }
 

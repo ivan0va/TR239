@@ -1,17 +1,18 @@
 package com.bot;
 
+import problem.Square;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
     private static ArrayList<Point> points = new ArrayList<Point>();
-    public static void createGUI() {
+        private static ArrayList<Line> lines;
+        public static void createGUI() {
+            lines = new ArrayList<Line>();
         final JFrame frame = new JFrame("Testframe");
 	    frame.setPreferredSize(new Dimension(700,700));
 	    JPanel panel = new JPanel(new BorderLayout());
@@ -49,33 +50,36 @@ public class Main {
         JLabel N = new JLabel("NUM:");
         N.setBounds(2,70,30,25);
         butPanel.add(N);
+        final JLabel Answer = new JLabel("Ответ:");
+        Answer.setBounds(2,500,200,40);
+        butPanel.add(Answer);
 
         JLabel X1 = new JLabel("X1:");
-        X1.setBounds(2,255,50,25);
+        X1.setBounds(2,255,20,25);
         butPanel.add(X1);
         JLabel Y1 = new JLabel("Y1:");
-        Y1.setBounds(45,255,50,25);
+        Y1.setBounds(50,255,20,25);
         butPanel.add(Y1);
 
         JLabel X2 = new JLabel("X2:");
-        X2.setBounds(2,310,50,25);
+        X2.setBounds(2,310,20,25);
         butPanel.add(X2);
         JLabel Y2 = new JLabel("Y2:");
-        Y2.setBounds(45,310,50,25);
+        Y2.setBounds(50,310,20,25);
         butPanel.add(Y2);
 
         JLabel X3 = new JLabel("X3:");
-        X3.setBounds(2,365,50,25);
+        X3.setBounds(2,365,20,25);
         butPanel.add(X3);
         JLabel Y3 = new JLabel("Y3:");
-        Y3.setBounds(45,365,50,25);
+        Y3.setBounds(50,365,20,25);
         butPanel.add(Y3);
 
         JLabel X4 = new JLabel("X4:");
-        X4.setBounds(2,420,50,25);
+        X4.setBounds(2,420,20,25);
         butPanel.add(X4);
         JLabel Y4 = new JLabel("Y4:");
-        Y4.setBounds(45,420,50,25);
+        Y4.setBounds(50,420,20,25);
         butPanel.add(Y4);
 
         final JTextField x = new JTextField();
@@ -88,32 +92,75 @@ public class Main {
         n.setBounds(35,70,25,25);
         butPanel.add(n);
         final JTextField x1 = new JTextField();
-        x1.setBounds(20,255,25,25);
+        x1.setBounds(22,255,25,25);
         butPanel.add(x1);
         final JTextField y1 = new JTextField();
-        y1.setBounds(60,255,25
+        y1.setBounds(70,255,25
                 ,25);
         butPanel.add(y1);
         final JTextField x2 = new JTextField();
-        x2.setBounds(20,310,25,25);
+        x2.setBounds(22,310,25,25);
         butPanel.add(x2);
         final JTextField y2 = new JTextField();
-        y2.setBounds(60,310,25,25);
+        y2.setBounds(70,310,25,25);
         butPanel.add(y2);
         final JTextField x3 = new JTextField();
-        x3.setBounds(20,365,25,25);
+        x3.setBounds(22,365,25,25);
         butPanel.add(x3);
         final JTextField y3 = new JTextField();
-        y3.setBounds(60,365,25,25);
+        y3.setBounds(70,365,25,25);
         butPanel.add(y3);
         final JTextField x4 = new JTextField();
-        x4.setBounds(20,420,25,25);
+        x4.setBounds(22,420,25,25);
         butPanel.add(x4);
         final JTextField y4 = new JTextField();
-        y4.setBounds(60,420,25,25);
+        y4.setBounds(70,420,25,25);
         butPanel.add(y4);
 
 
+        JButton button4 = new JButton("Решить задачу");
+        button4.setBounds(2,200,180,40);
+        butPanel.add(button4);
+        button4.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                double maxPerimeter = 0;
+                Point max1=new Point();
+                Point max2=new Point();
+                Point max3=new Point();
+                Point max4=new Point();
+
+                for (int i = 0; i < points.size(); i++) {
+                    for (int j = i + 1; j <  points.size(); j++) {
+                        for (int k = j + 1; k < points.size(); k++) {
+                            for (int t = k + 1; t < points.size(); t++) {
+                                Point a = points.get(i);
+                                Point b = points.get(j);
+                                Point c = points.get(k);
+                                Point d = points.get(t);
+
+                                Square s = new Square(a, b, c, d);
+                                if ( s.areSidesEqual() && ((s.b.x-s.a.x)!= (s.c.y-s.a.y))&&((s.d.x-s.a.x)!= (s.b.y-s.a.y))) {
+                                    if (s.getPerimeter() > maxPerimeter) {
+                                        maxPerimeter = s.getPerimeter();
+                                        max1 = new Point(s.a.x, s.a.y);
+                                        max2 = new Point(s.b.x, s.b.y);
+                                        max3 = new Point(s.c.x, s.c.y);
+                                        max4 = new Point(s.d.x, s.d.y);
+                                    }
+                                }
+
+                            }
+
+                        }
+
+                    }
+                }
+                Answer.setText("Ответ:" + max1 +" "+max2 +" "+max3 +" "+max4 );
+
+            }
+        });
 
 
 
@@ -144,6 +191,7 @@ public class Main {
                             pointpane.revalidate();
                             pointpane.repaint();
                         }
+
                     }
                 }
 
@@ -177,11 +225,77 @@ public class Main {
         frame.setVisible(true);
 
     JButton button3 = new JButton("Добавить квадрат");
-        button3.setBounds(2,200,180,40);
+        button3.setBounds(2,460,180,40);
         butPanel.add(button3);
         button3.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e) {
+            int X1 = (!x1.getText().equals("")?Integer.parseInt(x1.getText()):0);
+            int Y1= (!y1.getText().equals("")?Integer.parseInt(y1.getText()):0);
+            int X2 = (!x2.getText().equals("")?Integer.parseInt(x2.getText()):0);
+            int Y2= (!y2.getText().equals("")?Integer.parseInt(y2.getText()):0);
+            int X3 = (!x3.getText().equals("")?Integer.parseInt(x3.getText()):0);
+            int Y3= (!y3.getText().equals("")?Integer.parseInt(y3.getText()):0);
+            int X4 = (!x4.getText().equals("")?Integer.parseInt(x4.getText()):0);
+            int Y4= (!y4.getText().equals("")?Integer.parseInt(y4.getText()):0);
+
+
+            Point a = new Point (X1, Y1);
+            Point b = new Point (X2, Y2);
+            Point c = new Point (X3, Y3);
+            Point d = new Point (X4, Y4);
+            Square s = new Square(a, b, c, d);
+            if ( s.areSidesEqual() && ((X3-X1)/(X2-X1)!=(Y3-Y1)/(Y2-Y1))&&((X4-X1)/(X2-X1)!=(Y4-Y1)/(Y2-Y1))) {
+            Point b1 = new Point(X1, Y1);
+                                points.add(b1);
+                                b1.setBounds(b1.x,b1.y,b1.x+3,b1.y+3);
+                                pointpane.add(b1);
+                                pointpane.revalidate();
+                                pointpane.repaint();
+            Point b2 = new Point(X2, Y2);
+                                points.add(b2);
+                                b2.setBounds(b2.x,b2.y,b2.x+3,b2.y+3);
+                                pointpane.add(b2);
+                                pointpane.revalidate();
+                                pointpane.repaint();
+            Point b3 = new Point(X3, Y3);
+                                points.add(b3);
+                                b3.setBounds(b3.x,b3.y,b3.x+3,b3.y+3);
+                                pointpane.add(b3);
+                                pointpane.revalidate();
+                                pointpane.repaint();
+            Point b4 = new Point(X4, Y4);
+                                points.add(b4);
+                                b4.setBounds(b4.x,b4.y,b4.x+3,b4.y+3);
+                                pointpane.add(b4);
+                                pointpane.revalidate();
+                                pointpane.repaint();
+
+                                Line temp = new Line(b1, b2);
+                                lines.add(temp);
+                                pointpane.add(temp);
+                                temp.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                                pointpane.revalidate();
+                                pointpane.repaint();
+            Line temp1 = new Line(b3, b2);
+            lines.add(temp1);
+            pointpane.add(temp1);
+            temp1.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+            pointpane.revalidate();
+            pointpane.repaint();
+            Line temp2 = new Line(b4, b3);
+            lines.add(temp2);
+            pointpane.add(temp2);
+            temp2.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+            pointpane.revalidate();
+            pointpane.repaint();
+            Line temp3 = new Line(b1, b4);
+            lines.add(temp3);
+            pointpane.add(temp3);
+            temp3.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+            pointpane.revalidate();
+            pointpane.repaint();
+                            }
 
             System.out.println("Добавлен квадрат");
             System.out.println("Точка 1: x =" + x1.getText() + ";" + "y=" + y1.getText());
@@ -189,7 +303,10 @@ public class Main {
             System.out.println("Точка 3: x =" + x3.getText() + ";" + "y=" + y3.getText());
             System.out.println("Точка 4: x =" + x4.getText() + ";" + "y=" + y4.getText());
         }
-        }); }
+        });}
+
+
+
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
