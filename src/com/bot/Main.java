@@ -51,8 +51,20 @@ public class Main {
         N.setBounds(2,70,30,25);
         butPanel.add(N);
         final JLabel Answer = new JLabel("Ответ:");
-        Answer.setBounds(2,500,200,40);
+        Answer.setBounds(2,500,900,40);
         butPanel.add(Answer);
+            final JLabel Answer1 = new JLabel(" ");
+            Answer1.setBounds(2,520,900,40);
+            butPanel.add(Answer1);
+            final JLabel Answer2 = new JLabel(" ");
+            Answer2.setBounds(2,540,900,40);
+            butPanel.add(Answer2);
+            final JLabel Answer3 = new JLabel(" ");
+            Answer3.setBounds(2,560,900,40);
+            butPanel.add(Answer3);
+            final JLabel Answer4 = new JLabel(" ");
+            Answer4.setBounds(2,580,900,40);
+            butPanel.add(Answer4);
 
         JLabel X1 = new JLabel("X1:");
         X1.setBounds(2,255,20,25);
@@ -141,7 +153,7 @@ public class Main {
                                 Point d = points.get(t);
 
                                 Square s = new Square(a, b, c, d);
-                                if ( s.areSidesEqual() && ((s.b.x-s.a.x)!= (s.c.y-s.a.y))&&((s.d.x-s.a.x)!= (s.b.y-s.a.y))) {
+                                if ( s.areSidesEqual1() ||  s.areSidesEqual2() ) { //&& ((s.b.x-s.a.x)!= (s.c.y-s.a.y))&&((s.d.x-s.a.x)!= (s.b.y-s.a.y))) {
                                     if (s.getPerimeter() > maxPerimeter) {
                                         maxPerimeter = s.getPerimeter();
                                         max1 = new Point(s.a.x, s.a.y);
@@ -157,8 +169,76 @@ public class Main {
 
                     }
                 }
-                Answer.setText("Ответ:" + max1 +" "+max2 +" "+max3 +" "+max4 );
+                Point a = new Point(max1.x, max1.y);
+                points.add(a);
+                a.setBounds(a.x, a.y,a.x + 3, a.y + 3);
+                pointpane.add(a);
+                pointpane.revalidate();
+                pointpane.repaint();
 
+                Point b = new Point(max2.x, max2.y);
+                points.add(b);
+                b.setBounds(b.x, b.y, b.x + 3, b.y + 3);
+                pointpane.add(b);
+                pointpane.revalidate();
+                pointpane.repaint();
+
+                Point c = new Point(max3.x, max3.y);
+                points.add(c);
+                c.setBounds(c.x, c.y, c.x + 3, c.y + 3);
+                pointpane.add(c);
+                pointpane.revalidate();
+                pointpane.repaint();
+
+                Point d = new Point(max4.x, max4.y);
+                points.add(d);
+                d.setBounds(d.x, d.y, d.x + 3, d.y + 3);
+                pointpane.add(d);
+                pointpane.revalidate();
+                pointpane.repaint();
+
+                Line temp = new Line(a, b);
+                lines.add(temp);
+                pointpane.add(temp);
+                temp.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                pointpane.revalidate();
+                pointpane.repaint();
+                Line temp1 = new Line(b, c);
+                lines.add(temp1);
+                pointpane.add(temp1);
+                temp1.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                pointpane.revalidate();
+                pointpane.repaint();
+                Line temp2 = new Line(c, d);
+                lines.add(temp2);
+                pointpane.add(temp2);
+                temp2.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                pointpane.revalidate();
+                pointpane.repaint();
+                Line temp3 = new Line(a, d);
+                lines.add(temp3);
+                pointpane.add(temp3);
+                temp3.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                pointpane.revalidate();
+                pointpane.repaint();
+                Line temp4 = new Line(d, b);
+                lines.add(temp4);
+                pointpane.add(temp4);
+                temp4.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                pointpane.revalidate();
+                pointpane.repaint();
+                Line temp5 = new Line(a, c);
+                lines.add(temp5);
+                pointpane.add(temp5);
+                temp5.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                pointpane.revalidate();
+                pointpane.repaint();
+
+                Answer.setText("Ответ:" + max1);
+                Answer1.setText(" " + max2);
+                Answer2.setText(" " + max3);
+                Answer3.setText(" " + max4);
+                Answer4.setText("Периметр:" + maxPerimeter);
             }
         });
 
@@ -209,6 +289,10 @@ public class Main {
                         int index = points.size() - 1;
                         Point point = points.remove(index);
                         pointpane.remove(point);
+                        Answer.setText("Ответ:");
+                        Answer1.setText("");
+                        Answer3.setText("");
+                        Answer2.setText("");
                         pointpane.repaint();
                         pointpane.revalidate();
                     }
@@ -223,6 +307,10 @@ public class Main {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
+
+
+
 
     JButton button3 = new JButton("Добавить квадрат");
         button3.setBounds(2,460,180,40);
@@ -245,7 +333,7 @@ public class Main {
             Point c = new Point (X3, Y3);
             Point d = new Point (X4, Y4);
             Square s = new Square(a, b, c, d);
-            if (s.areSidesEqual() ) {
+            if (s.areSidesEqual1() ||  s.areSidesEqual2() ) {
                     //if ( ((X1-X2)!= 0) && ((Y1-Y2)!= 0)  &&((X3-X1)/(X2-X1)!=(Y3-Y1)/(Y2-Y1))&&((X4-X1)/(X2-X1)!=(Y4-Y1)/(Y2-Y1))||(((X1-X2)== 0) && ((Y1-Y2)== 0) )) {
                 Point b1 = new Point(X1, Y1);
                 points.add(b1);
@@ -272,7 +360,6 @@ public class Main {
                 pointpane.revalidate();
                 pointpane.repaint();
                 Point b5 = new Point(X4, Y4);
-                if (Math.sqrt((c.x - a.x)*(c.x - a.x) +(c.y - a.y)*(c.y - a.y) )> Math.sqrt((b.x - a.x)*(b.x - a.x) + (b.y - a.y)*(b.y - a.y))) {
 
 
                 Line temp = new Line(b1, b2);
@@ -299,6 +386,18 @@ public class Main {
                 temp3.setBounds(2, 2, frame.getWidth(), frame.getHeight());
                 pointpane.revalidate();
                 pointpane.repaint();
+                Line temp4 = new Line(b1, b3);
+                lines.add(temp2);
+                pointpane.add(temp2);
+                temp2.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                pointpane.revalidate();
+                pointpane.repaint();
+                Line temp5 = new Line(b2, b4);
+                lines.add(temp3);
+                pointpane.add(temp3);
+                temp3.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                pointpane.revalidate();
+                pointpane.repaint();
 
 
                 System.out.println("Добавлен квадрат");
@@ -306,7 +405,8 @@ public class Main {
                 System.out.println("Точка 2: x =" + x2.getText() + ";" + "y=" + y2.getText());
                 System.out.println("Точка 3: x =" + x3.getText() + ";" + "y=" + y3.getText());
                 System.out.println("Точка 4: x =" + x4.getText() + ";" + "y=" + y4.getText());
-            }}
+                System.out.println("Периметр:" + s.getPerimeter());
+            }
             else
                 System.out.println ("hi");
         }

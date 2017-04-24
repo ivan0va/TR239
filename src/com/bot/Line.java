@@ -15,7 +15,7 @@ public class Line extends JPanel {
 
 
     public void paint(Graphics g){
-        g.setColor(Color.BLACK);
+        g.setColor(Color.PINK);
             g.drawLine(a.x, a.y, b.x, b.y);
         g.setColor(Color.red);
     }

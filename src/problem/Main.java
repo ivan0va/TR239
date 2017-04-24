@@ -25,7 +25,7 @@ public class Main {
                     for (int t = k + 1; t < n; t++) {
 
                         Square s = new Square(a[i], a[j], a[k], a[t]);
-                        if ( s.areSidesEqual() ) {//&& s.areNotOnOneLine() {
+                        if ( s.areSidesEqual1() || s.areSidesEqual2()) {//&& s.areNotOnOneLine() {
                             if (s.getPerimeter() > maxPerimeter) {
                                 maxPerimeter = s.getPerimeter();
                                 max1 = new com.bot.Point(s.a.x, s.a.y);
