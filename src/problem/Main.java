@@ -25,7 +25,11 @@ public class Main {
                     for (int t = k + 1; t < n; t++) {
 
                         Square s = new Square(a[i], a[j], a[k], a[t]);
-                        if ( s.areSidesEqual1() || s.areSidesEqual2()) {//&& s.areNotOnOneLine() {
+                        if ( s.areSidesEqual1() ||  s.areSidesEqual2() || s.areSidesEqual3()
+                                && ((s.b.x-s.a.x)*(s.c.y-s.a.y)!= (s.b.y-s.a.y)*(s.c.x-s.a.x))
+                                && ((s.d.x-s.a.x)*(s.b.y-s.a.y)!= (s.d.y-s.a.y)*(s.b.x-s.a.x))
+                                && ((s.b.x-s.c.x)*(s.c.y-s.d.y)!= (s.b.y-s.c.y)*(s.c.x-s.d.x))
+                                && ((s.d.x-s.c.x)*(s.d.y-s.a.y)!= (s.d.y-s.c.y)*(s.d.x-s.a.x))){
                             if (s.getPerimeter() > maxPerimeter) {
                                 maxPerimeter = s.getPerimeter();
                                 max1 = new com.bot.Point(s.a.x, s.a.y);
@@ -45,4 +49,6 @@ public class Main {
         System.out.println(max1);
         System.out.println(max2);
         System.out.println(max3);
-        System.out.println(max4);      }}
+        System.out.println(max4);
+        System.out.println(maxPerimeter);
+    }}

@@ -8,7 +8,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     private static ArrayList<Point> points = new ArrayList<Point>();
@@ -24,6 +27,13 @@ public class Main {
         final Panel pointpane   = new Panel();
         pointpane.setLayout(null);
         //pointpane.setPreferredSize(new Dimension(350,700));
+            final Point[] max1_ans = {new Point()};
+           final Point max2_ans = new Point();
+           final Point max3_ans = new Point();
+           final Point max4_ans = new Point();
+            final double[] maxPerimeter_ans = {0};
+
+
 
 	    JLabel addPointwithCoords = new JLabel("Добавить точку по координатам");
 	    addPointwithCoords.setBounds(2,2,300,25);
@@ -31,18 +41,6 @@ public class Main {
 	    JLabel addRandomPoints = new JLabel("Добавить рандомное количество точек");
 	    addRandomPoints.setBounds(2,50,300,25);
 	    butPanel.add(addRandomPoints);
-        JLabel addPointwithCoords1 = new JLabel("Добавить точку по координатам");
-        addPointwithCoords.setBounds(2,2,300,25);
-        butPanel.add(addPointwithCoords1);
-        JLabel addPointwithCoords2 = new JLabel("Добавить точку по координатам");
-        addPointwithCoords.setBounds(2,2,300,25);
-        butPanel.add(addPointwithCoords2);
-        JLabel addPointwithCoords3 = new JLabel("Добавить точку по координатам");
-        addPointwithCoords.setBounds(2,2,300,25);
-        butPanel.add(addPointwithCoords3);
-        JLabel addPointwithCoords4 = new JLabel("Добавить точку по координатам");
-        addPointwithCoords.setBounds(2,2,300,25);
-        butPanel.add(addPointwithCoords4);
         JLabel X = new JLabel("X:");
         X.setBounds(2,25,15,25);
         butPanel.add(X);
@@ -53,19 +51,19 @@ public class Main {
         N.setBounds(2,70,30,25);
         butPanel.add(N);
         final JLabel Answer = new JLabel("Ответ:");
-        Answer.setBounds(2,255,900,40);
+        Answer.setBounds(2,300,900,40);
         butPanel.add(Answer);
             final JLabel Answer1 = new JLabel(" ");
-            Answer1.setBounds(2,275,900,40);
+            Answer1.setBounds(2,320,900,40);
             butPanel.add(Answer1);
             final JLabel Answer2 = new JLabel(" ");
-            Answer2.setBounds(2,295,900,40);
+            Answer2.setBounds(2,340,900,40);
             butPanel.add(Answer2);
             final JLabel Answer3 = new JLabel(" ");
-            Answer3.setBounds(2,315,900,40);
+            Answer3.setBounds(2,360,900,40);
             butPanel.add(Answer3);
             final JLabel Answer4 = new JLabel(" ");
-            Answer4.setBounds(2,335,900,40);
+            Answer4.setBounds(2,380,900,40);
             butPanel.add(Answer4);
 
 
@@ -80,7 +78,7 @@ public class Main {
         butPanel.add(n);
 
         JButton button4 = new JButton("Решить задачу");
-        button4.setBounds(2,200,160,40);
+        button4.setBounds(2,250,180,40);
         butPanel.add(button4);
         button4.addActionListener(new ActionListener(){
             @Override
@@ -106,7 +104,13 @@ public class Main {
                                         && ((s.b.x-s.a.x)*(s.c.y-s.a.y)!= (s.b.y-s.a.y)*(s.c.x-s.a.x))
                                         && ((s.d.x-s.a.x)*(s.b.y-s.a.y)!= (s.d.y-s.a.y)*(s.b.x-s.a.x))
                                         && ((s.b.x-s.c.x)*(s.c.y-s.d.y)!= (s.b.y-s.c.y)*(s.c.x-s.d.x))
-                                        && ((s.d.x-s.c.x)*(s.d.y-s.a.y)!= (s.d.y-s.c.y)*(s.d.x-s.a.x))) {
+                                        && ((s.d.x-s.c.x)*(s.d.y-s.a.y)!= (s.d.y-s.c.y)*(s.d.x-s.a.x))
+                                        && (((s.a.x != s.b.x)&& (s.a.y != s.b.y))
+                                        ||  ((s.a.x != s.c.x)&& (s.a.y != s.c.y))
+                                        ||  ((s.a.x != s.d.x)&& (s.a.y != s.d.y))
+                                        ||  ((s.b.x != s.c.x)&& (s.b.y != s.c.y))
+                                        ||  ((s.b.x != s.d.x)&& (s.b.y != s.d.y))
+                                        ||  ((s.c.x != s.d.x)&& (s.c.y != s.d.y)))) {
                                     if (s.getPerimeter() > maxPerimeter) {
                                         maxPerimeter = s.getPerimeter();
                                         max1 = new Point(s.a.x, s.a.y);
@@ -236,13 +240,57 @@ public class Main {
                 Answer2.setText(" " + max3);
                 Answer3.setText(" " + max4);
                 Answer4.setText("Периметр:" + maxPerimeter);
+                max1_ans[0].x = max1.x;
+                max1_ans[0].y = max1.y;
+                max2_ans.x = max2.x;
+                max2_ans.y = max2.y;
+                max3_ans.x = max3.x;
+                max3_ans.y = max3.y;
+                max4_ans.x = max4.x;
+                max4_ans.y = max4.y;
+                maxPerimeter_ans[0] = maxPerimeter;
+
+
             }
         });
+            JButton button6 = new JButton("Считывание из файла");
+            button6.setBounds(2,200,180,40);
+            butPanel.add(button6);
+            button6.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try (Scanner in = new Scanner(new File("input.txt"))) {
+                        int n = in.nextInt();
+                        for (int i = 0 ; i < n; i++) {
+                            points.add(new Point(in.nextInt(), in.nextInt()));
+                        }
+                        in.close();
+                    } catch (FileNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
+                    for(int i=0;i<points.size();i++){
+                        points.get(i).setBounds(points.get(i).x,points.get(i).y,points.get(i).x+3,points.get(i).y+3);
+                        pointpane.add(points.get(i));
+                        pointpane.revalidate();
+                        pointpane.repaint();
+                    }
+                    System.out.println("Считывание из файла");
+                }});
 
+            //JButton button5 = new JButton("Записать в файл");
+           // button5.setBounds(2, 200, 160, 40);
+           // butPanel.add(button5);
+           // button5.addActionListener(new ActionListener() {
+             //   @Override
+              //  public void actionPerformed(ActionEvent e) {
+               //     new Reader().write(max1_ans, max2_ans, max3_ans, max4_ans, maxPerimeter_ans, points, "out.txt");
+               //     System.out.println("записано");
+              //  }
+           // });
 
 
         JButton button1 = new JButton("Добавить точку");
-        button1.setBounds(2,100,160,40);
+        button1.setBounds(2,100,180,40);
         butPanel.add(button1);
         button1.addActionListener(new ActionListener(){
             @Override
@@ -307,7 +355,7 @@ public class Main {
 
             }
         });
-        button2.setBounds(2,150,160,40);
+        button2.setBounds(2,150,180,40);
         butPanel.add(button2);
         panel.add(pointpane,BorderLayout.CENTER);
         panel.add(butPanel,BorderLayout.EAST);

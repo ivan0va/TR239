@@ -17,20 +17,23 @@ public class Square {
 
 
    public boolean areSidesEqual1() {
-        return ((Math.sqrt((c.x - a.x)*(c.x - a.x) +(c.y - a.y)*(c.y - a.y))
-                ==(Math.sqrt ((b.x - d.x)*(b.x - d.x) + (b.y - d.y)*(b.y - d.y))))
+       return    ((Math.sqrt((c.x - a.x)*(c.x - a.x) +(c.y - a.y)*(c.y - a.y))
+                ==(Math.sqrt((b.x - d.x)*(b.x - d.x) + (b.y - d.y)*(b.y - d.y))))
                 &&(Math.sqrt((c.x - b.x)*(c.x - b.x) + (c.y - b.y)*(c.y - b.y))
-                ==(Math.sqrt((b.x - a.x)*(b.x - a.x) + (b.y - a.y)*(b.y - a.y))))
-                &&(Math.sqrt((a.x - d.x)*(a.x - d.x) + (a.y - d.y)*(a.y - d.y))
-                ==(Math.sqrt((b.x - a.x)*(b.x - a.x) + (b.y - a.y)*(b.y - a.y))))
-        ); }
+                ==Math.sqrt(((b.x - a.x) * (b.x - a.x)) + ((b.y - a.y) * (b.y - a.y))))
+                && (Math.sqrt((a.x - d.x)*(a.x - d.x) + (a.y - d.y)*(a.y - d.y))
+                ==Math.sqrt((c.x - d.x) * (c.x - d.x) + (c.y - d.y) * (c.y - d.y)))
+               && (Math.sqrt((a.x - d.x)*(a.x - d.x) + (a.y - d.y)*(a.y - d.y))
+               ==Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)))) ; }
     public boolean areSidesEqual2() {
-       return ((Math.sqrt((c.x - a.x) * (c.x - a.x) + (c.y - a.y) * (c.y - a.y))
-                   == (Math.sqrt((b.x - c.x) * (b.x - c.x) + (b.y - c.y) * (b.y - c.y))))
-                   && (Math.sqrt((c.x - d.x) * (c.x - d.x) + (c.y - d.y) * (c.y - d.y))
-                   == (Math.sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y))))
-                   &&(Math.sqrt((c.x - b.x)*(c.x - b.x) + (c.y - b.y)*(c.y - b.y))
-                   ==(Math.sqrt((b.x - d.x)*(b.x - d.x) + (b.y - d.y)*(b.y - d.y)))));
+         return  ((Math.sqrt((c.x - d.x) * (c.x - d.x) + (c.y - d.y) * (c.y - d.y))
+                ==(Math.sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y))))
+                &&(Math.sqrt((c.x - a.x)*(c.x - a.x) + (c.y - a.y) * (c.y - a.y))
+                ==Math.sqrt((b.x - c.x) * (b.x - c.x) + (b.y - c.y) * (b.y - c.y)))
+                &&(Math.sqrt((b.x - d.x)*(b.x - d.x) + (b.y - d.y)*(b.y - d.y))
+                ==Math.sqrt((a.x - d.x)*(a.x - d.x) + (a.y - d.y)*(a.y - d.y)))
+                 &&(Math.sqrt((a.x - d.x)*(a.x - d.x) + (a.y - d.y)*(a.y - d.y))
+                 ==Math.sqrt((a.x - c.x)*(a.x - c.x) + (a.y - c.y)*(a.y - c.y))));
 
        }
        public boolean areSidesEqual3() {
@@ -39,6 +42,8 @@ public class Square {
                    && (Math.sqrt((c.x - d.x) * (c.x - d.x) + (c.y - d.y) * (c.y - d.y))
                    == (Math.sqrt((b.x - d.x) * (b.x - d.x) + (b.y - d.y) * (b.y - d.y))))
                    &&(Math.sqrt((d.x - b.x)*(d.x - b.x) + (d.y - b.y)*(d.y - b.y))
+                   ==(Math.sqrt((b.x - a.x)*(b.x - a.x) + (b.y - a.y)*(b.y - a.y))))
+                   &&(Math.sqrt((a.x - c.x)*(a.x - c.x) + (a.y - c.y)*(a.y - c.y))
                    ==(Math.sqrt((b.x - a.x)*(b.x - a.x) + (b.y - a.y)*(b.y - a.y)))));
        }
 
