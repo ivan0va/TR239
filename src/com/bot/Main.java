@@ -1,7 +1,5 @@
 package com.bot;
 
-
-
 import problem.Square;
 
 import javax.swing.*;
@@ -10,29 +8,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 public class Main {
+    private static Point amax1 = new Point();
+    private static Point amax2 = new Point();
+    private static Point amax3 = new Point();
+    private static Point amax4 = new Point();
+    private static double amaxPerimeter = 0;
     private static ArrayList<Point> points = new ArrayList<Point>();
         private static ArrayList<Line> lines;
-        public static void createGUI() {
+        public static void createGUI() throws FileNotFoundException {
             lines = new ArrayList<Line>();
         final JFrame frame = new JFrame("Testframe");
 	    frame.setPreferredSize(new Dimension(700,700));
-	    JPanel panel = new JPanel(new BorderLayout());
-        Panel butPanel = new Panel();
+	    final JPanel panel = new JPanel(new BorderLayout());
+        final Panel butPanel = new Panel();
         butPanel.setLayout(null);
         butPanel.setPreferredSize(new Dimension(250,700));
         final Panel pointpane   = new Panel();
         pointpane.setLayout(null);
         //pointpane.setPreferredSize(new Dimension(350,700));
-            final Point[] max1_ans = {new Point()};
-           final Point max2_ans = new Point();
-           final Point max3_ans = new Point();
-           final Point max4_ans = new Point();
-            final double[] maxPerimeter_ans = {0};
-
 
 
 	    JLabel addPointwithCoords = new JLabel("Добавить точку по координатам");
@@ -51,19 +48,19 @@ public class Main {
         N.setBounds(2,70,30,25);
         butPanel.add(N);
         final JLabel Answer = new JLabel("Ответ:");
-        Answer.setBounds(2,300,900,40);
+        Answer.setBounds(2,350,900,40);
         butPanel.add(Answer);
             final JLabel Answer1 = new JLabel(" ");
-            Answer1.setBounds(2,320,900,40);
+            Answer1.setBounds(2,370,900,40);
             butPanel.add(Answer1);
             final JLabel Answer2 = new JLabel(" ");
-            Answer2.setBounds(2,340,900,40);
+            Answer2.setBounds(2,390,900,40);
             butPanel.add(Answer2);
             final JLabel Answer3 = new JLabel(" ");
-            Answer3.setBounds(2,360,900,40);
+            Answer3.setBounds(2,410,900,40);
             butPanel.add(Answer3);
             final JLabel Answer4 = new JLabel(" ");
-            Answer4.setBounds(2,380,900,40);
+            Answer4.setBounds(2,430,900,40);
             butPanel.add(Answer4);
 
 
@@ -84,7 +81,7 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                double maxPerimeter = 0;
+                double maxPerimeter=0;
                 Point max1=new Point();
                 Point max2=new Point();
                 Point max3=new Point();
@@ -235,97 +232,238 @@ public class Main {
                     pointpane.repaint();}
 
 
-                Answer.setText("Ответ:" + max1);
-                Answer1.setText(" " + max2);
-                Answer2.setText(" " + max3);
-                Answer3.setText(" " + max4);
-                Answer4.setText("Периметр:" + maxPerimeter);
-                max1_ans[0].x = max1.x;
-                max1_ans[0].y = max1.y;
-                max2_ans.x = max2.x;
-                max2_ans.y = max2.y;
-                max3_ans.x = max3.x;
-                max3_ans.y = max3.y;
-                max4_ans.x = max4.x;
-                max4_ans.y = max4.y;
-                maxPerimeter_ans[0] = maxPerimeter;
-
 
             }
         });
-            JButton button6 = new JButton("Считывание из файла");
-            button6.setBounds(2,200,180,40);
-            butPanel.add(button6);
-            button6.addActionListener(new ActionListener(){
+            JButton readFileBut = new JButton("Читать из файла" );
+            readFileBut.setBounds(2,200,200,40);
+            butPanel.add(readFileBut);
+            readFileBut.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try (Scanner in = new Scanner(new File("input.txt"))) {
                         int n = in.nextInt();
-                        for (int i = 0 ; i < n; i++) {
-                            points.add(new Point(in.nextInt(), in.nextInt()));
-                        }
-                        in.close();
-                    } catch (FileNotFoundException e1) {
-                        e1.printStackTrace();
-                    }
-                    for(int i=0;i<points.size();i++){
-                        points.get(i).setBounds(points.get(i).x,points.get(i).y,points.get(i).x+3,points.get(i).y+3);
-                        pointpane.add(points.get(i));
-                        pointpane.revalidate();
-                        pointpane.repaint();
-                    }
-                    System.out.println("Считывание из файла");
-                }});
-
-            //JButton button5 = new JButton("Записать в файл");
-           // button5.setBounds(2, 200, 160, 40);
-           // butPanel.add(button5);
-           // button5.addActionListener(new ActionListener() {
-             //   @Override
-              //  public void actionPerformed(ActionEvent e) {
-               //     new Reader().write(max1_ans, max2_ans, max3_ans, max4_ans, maxPerimeter_ans, points, "out.txt");
-               //     System.out.println("записано");
-              //  }
-           // });
-
-
-        JButton button1 = new JButton("Добавить точку");
-        button1.setBounds(2,100,180,40);
-        butPanel.add(button1);
-        button1.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int X = (!x.getText().equals("")?Integer.parseInt(x.getText()):0);
-                int Y= (!y.getText().equals("")?Integer.parseInt(y.getText()):0);
-                int N = (!n.getText().equals("")?Integer.parseInt(n.getText()):0);
-                if ((X>0)&&(Y>0)) {
-                    Point b = new Point(X, Y);
-                    points.add(b);
-                    b.setBounds(b.x,b.y,b.x+3,b.y+3);
-                    pointpane.add(b);
-                    pointpane.revalidate();
-                    pointpane.repaint();
-                }
-                else {
-                    if (N>0){
-                        for (int i=0;i<N;i++){
-                            Point b = new Point((int)(Math.random()*(frame.getWidth()-250)), (int)(Math.random()*frame.getHeight()));
-                            points.add(b);
-                            b.setBounds(b.x,b.y,b.x+3,b.y+3);
-                            pointpane.add(b);
+                        Point[] q = new com.bot.Point[n];
+                        for (int i = 0; i < n; i++) {
+                            q[i] = new com.bot.Point(in.nextInt(), in.nextInt());
+                            points.add(q[i]);
+                            q[i].setBounds(q[i].x,q[i].y,q[i].x+3,q[i].y+3);
+                            pointpane.add(q[i]);
                             pointpane.revalidate();
                             pointpane.repaint();
                         }
+                        double maxPerimeter = 0;
+                        Point max1 = new com.bot.Point();
+                        Point max2 = new com.bot.Point();
+                        Point max3 = new com.bot.Point();
+                        Point max4 = new com.bot.Point();
 
+                        for (int i = 0; i < n; i++) {
+                            for (int j = i + 1; j < n; j++) {
+                                for (int k = j + 1; k < n; k++) {
+                                    for (int t = k + 1; t < n; t++) {
+
+                                        Square s = new Square(q[i], q[j], q[k],q[t]);
+                                        if (s.areSidesEqual1() || s.areSidesEqual2() || s.areSidesEqual3()
+                                                && ((s.b.x - s.a.x) * (s.c.y - s.a.y) != (s.b.y - s.a.y) * (s.c.x - s.a.x))
+                                                && ((s.d.x - s.a.x) * (s.b.y - s.a.y) != (s.d.y - s.a.y) * (s.b.x - s.a.x))
+                                                && ((s.b.x - s.c.x) * (s.c.y - s.d.y) != (s.b.y - s.c.y) * (s.c.x - s.d.x))
+                                                && ((s.d.x - s.c.x) * (s.d.y - s.a.y) != (s.d.y - s.c.y) * (s.d.x - s.a.x))) {
+                                            if (s.getPerimeter() > maxPerimeter) {
+                                                maxPerimeter = s.getPerimeter();
+                                                max1 = new com.bot.Point(s.a.x, s.a.y);
+                                                max2 = new com.bot.Point(s.b.x, s.b.y);
+                                                max3 = new com.bot.Point(s.c.x, s.c.y);
+                                                max4 = new com.bot.Point(s.d.x, s.d.y);
+                                            }
+                                        }
+
+                                    }
+
+                                }
+
+                            }
+                        }
+                        amax1.x = max1.x;
+                        amax1.y = max1.y;
+                        amax2.x = max2.x;
+                        amax2.y = max2.y;
+                        amax3.x = max3.x;
+                        amax3.y = max3.y;
+                        amax4.x = max4.x;
+                        amax4.y = max4.y;
+                        amaxPerimeter = maxPerimeter;
+
+                        Point a = new Point(max1.x, max1.y);
+                        points.add(a);
+                        a.setBounds(a.x, a.y,a.x + 3, a.y + 3);
+                        pointpane.add(a);
+                        pointpane.revalidate();
+                        pointpane.repaint();
+
+                        Point b = new Point(max2.x, max2.y);
+                        points.add(b);
+                        b.setBounds(b.x, b.y, b.x + 3, b.y + 3);
+                        pointpane.add(b);
+                        pointpane.revalidate();
+                        pointpane.repaint();
+
+                        Point c = new Point(max3.x, max3.y);
+                        points.add(c);
+                        c.setBounds(c.x, c.y, c.x + 3, c.y + 3);
+                        pointpane.add(c);
+                        pointpane.revalidate();
+                        pointpane.repaint();
+
+                        Point d = new Point(max4.x, max4.y);
+                        points.add(d);
+                        d.setBounds(d.x, d.y, d.x + 3, d.y + 3);
+                        pointpane.add(d);
+                        pointpane.revalidate();
+                        pointpane.repaint();
+
+                        Square s = new Square (a, b, c, d);
+
+                        if (s.areSidesEqual1() ){
+                            Line temp = new Line(a, b);
+                            lines.add(temp);
+                            pointpane.add(temp);
+                            temp.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                            pointpane.revalidate();
+                            pointpane.repaint();
+                            Line temp1 = new Line(b, c);
+                            lines.add(temp1);
+                            pointpane.add(temp1);
+                            temp1.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                            pointpane.revalidate();
+                            pointpane.repaint();
+                            Line temp2 = new Line(c, d);
+                            lines.add(temp2);
+                            pointpane.add(temp2);
+                            temp2.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                            pointpane.revalidate();
+                            pointpane.repaint();
+                            Line temp3 = new Line(a, d);
+                            lines.add(temp3);
+                            pointpane.add(temp3);
+                            temp3.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                            pointpane.revalidate();
+                            pointpane.repaint();}
+
+                        if (s.areSidesEqual2()){
+                            Line temp = new Line(a, c);
+                            lines.add(temp);
+                            pointpane.add(temp);
+                            temp.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                            pointpane.revalidate();
+                            pointpane.repaint();
+                            Line temp1 = new Line(b, c);
+                            lines.add(temp1);
+                            pointpane.add(temp1);
+                            temp1.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                            pointpane.revalidate();
+                            pointpane.repaint();
+                            Line temp2 = new Line(b, d);
+                            lines.add(temp2);
+                            pointpane.add(temp2);
+                            temp2.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                            pointpane.revalidate();
+                            pointpane.repaint();
+                            Line temp3 = new Line(a, d);
+                            lines.add(temp3);
+                            pointpane.add(temp3);
+                            temp3.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                            pointpane.revalidate();
+                            pointpane.repaint();}
+
+                        if (s.areSidesEqual3()){
+                            Line temp = new Line(a, c);
+                            lines.add(temp);
+                            pointpane.add(temp);
+                            temp.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                            pointpane.revalidate();
+                            pointpane.repaint();
+                            Line temp1 = new Line(d, c);
+                            lines.add(temp1);
+                            pointpane.add(temp1);
+                            temp1.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                            pointpane.revalidate();
+                            pointpane.repaint();
+                            Line temp2 = new Line(b, d);
+                            lines.add(temp2);
+                            pointpane.add(temp2);
+                            temp2.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                            pointpane.revalidate();
+                            pointpane.repaint();
+                            Line temp3 = new Line(a, b);
+                            lines.add(temp3);
+                            pointpane.add(temp3);
+                            temp3.setBounds(2, 2, frame.getWidth(), frame.getHeight());
+                            pointpane.revalidate();
+                            pointpane.repaint();}
+
+
+
+                    } catch (FileNotFoundException e1) {
+                        e1.printStackTrace();
+                        System.out.print("IOError");
                     }
+                }});
+
+            JButton button6 = new JButton("Добавить в файл");
+            button6.setBounds(2,300,180,40);
+            butPanel.add(button6);
+            button6.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try (PrintWriter out = new PrintWriter(new File("output.txt"))) {
+                        out.println("(" + amax1.x + " ; " + amax1.y + ")");
+                        out.println("(" + amax2.x + " ; " + amax2.y + ")");
+                        out.println("(" + amax3.x + " ; " + amax3.y + ")");
+                        out.println("(" + amax4.x + " ; " + amax4.y + ")");
+                        out.println( amaxPerimeter );
+                    } catch (Exception e1) {
+                        System.out.print("Error");
+                    } }});
+
+
+                    JButton button1 = new JButton("Добавить точку");
+            button1.setBounds(2,100,180,40);
+            butPanel.add(button1);
+            button1.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int X = (!x.getText().equals("")?Integer.parseInt(x.getText()):0);
+                    int Y= (!y.getText().equals("")?Integer.parseInt(y.getText()):0);
+                    int N = (!n.getText().equals("")?Integer.parseInt(n.getText()):0);
+                    if ((X>0)&&(Y>0)) {
+                        Point b = new Point(X, Y);
+                        points.add(b);
+                        b.setBounds(b.x,b.y,b.x+3,b.y+3);
+                        pointpane.add(b);
+                        pointpane.revalidate();
+                        pointpane.repaint();
+                    }
+                    else {
+                        if (N>0){
+                            for (int i=0;i<N;i++){
+                                Point b = new Point((int)(Math.random()*(frame.getWidth()-250)), (int)(Math.random()*frame.getHeight()));
+                                points.add(b);
+                                b.setBounds(b.x,b.y,b.x+3,b.y+3);
+                                pointpane.add(b);
+                                pointpane.revalidate();
+                                pointpane.repaint();
+                            }
+
+                        }
+                    }
+
                 }
-
-            }
-        });
+            });
 
 
 
-        JButton button2 = new JButton("очистить");
+        JButton button2 = new JButton("Oчистить");
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -357,6 +495,7 @@ public class Main {
         });
         button2.setBounds(2,150,180,40);
         butPanel.add(button2);
+
         panel.add(pointpane,BorderLayout.CENTER);
         panel.add(butPanel,BorderLayout.EAST);
         frame.getContentPane().add(panel);
@@ -367,12 +506,15 @@ public class Main {
 
 
 
-
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 JFrame.setDefaultLookAndFeelDecorated(true);
-                createGUI();
+                try {
+                    createGUI();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }}
