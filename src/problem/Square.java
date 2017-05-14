@@ -24,7 +24,9 @@ public class Square {
                 && (Math.sqrt((a.x - d.x)*(a.x - d.x) + (a.y - d.y)*(a.y - d.y))
                 ==Math.sqrt((c.x - d.x) * (c.x - d.x) + (c.y - d.y) * (c.y - d.y)))
                && (Math.sqrt((a.x - d.x)*(a.x - d.x) + (a.y - d.y)*(a.y - d.y))
-               ==Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)))) ; }
+               ==Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)))); }
+
+
     public boolean areSidesEqual2() {
          return  ((Math.sqrt((c.x - d.x) * (c.x - d.x) + (c.y - d.y) * (c.y - d.y))
                 ==(Math.sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y))))

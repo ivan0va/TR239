@@ -25,7 +25,7 @@ public class Main {
                     for (int t = k + 1; t < n; t++) {
 
                         Square s = new Square(a[i], a[j], a[k], a[t]);
-                        if ( s.areSidesEqual1() ||  s.areSidesEqual2() || s.areSidesEqual3()
+                        if ( (s.areSidesEqual1() ||  s.areSidesEqual2() || s.areSidesEqual3())
                                 && ((s.b.x-s.a.x)*(s.c.y-s.a.y)!= (s.b.y-s.a.y)*(s.c.x-s.a.x))
                                 && ((s.d.x-s.a.x)*(s.b.y-s.a.y)!= (s.d.y-s.a.y)*(s.b.x-s.a.x))
                                 && ((s.b.x-s.c.x)*(s.c.y-s.d.y)!= (s.b.y-s.c.y)*(s.c.x-s.d.x))

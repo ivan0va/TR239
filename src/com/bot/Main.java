@@ -97,17 +97,11 @@ public class Main {
                                 Point d = points.get(t);
 
                                 Square s = new Square(a, b, c, d);
-                                if ( s.areSidesEqual1() ||  s.areSidesEqual2() || s.areSidesEqual3()
-                                        && ((s.b.x-s.a.x)*(s.c.y-s.a.y)!= (s.b.y-s.a.y)*(s.c.x-s.a.x))
-                                        && ((s.d.x-s.a.x)*(s.b.y-s.a.y)!= (s.d.y-s.a.y)*(s.b.x-s.a.x))
+                                if ( (s.areSidesEqual1() ||  s.areSidesEqual2() || s.areSidesEqual3())
+                                       && ((s.b.x-s.a.x)*(s.c.y-s.a.y)!= (s.b.y-s.a.y)*(s.c.x-s.a.x))
+                                       && ((s.d.x-s.a.x)*(s.b.y-s.a.y)!= (s.d.y-s.a.y)*(s.b.x-s.a.x))
                                         && ((s.b.x-s.c.x)*(s.c.y-s.d.y)!= (s.b.y-s.c.y)*(s.c.x-s.d.x))
-                                        && ((s.d.x-s.c.x)*(s.d.y-s.a.y)!= (s.d.y-s.c.y)*(s.d.x-s.a.x))
-                                        && (((s.a.x != s.b.x)&& (s.a.y != s.b.y))
-                                        ||  ((s.a.x != s.c.x)&& (s.a.y != s.c.y))
-                                        ||  ((s.a.x != s.d.x)&& (s.a.y != s.d.y))
-                                        ||  ((s.b.x != s.c.x)&& (s.b.y != s.c.y))
-                                        ||  ((s.b.x != s.d.x)&& (s.b.y != s.d.y))
-                                        ||  ((s.c.x != s.d.x)&& (s.c.y != s.d.y)))) {
+                                        && ((s.d.x-s.c.x)*(s.d.y-s.a.y)!= (s.d.y-s.c.y)*(s.d.x-s.a.x))){
                                     if (s.getPerimeter() > maxPerimeter) {
                                         maxPerimeter = s.getPerimeter();
                                         max1 = new Point(s.a.x, s.a.y);
@@ -123,6 +117,17 @@ public class Main {
 
                     }
                 }
+
+                amax1.x = max1.x;
+                amax1.y = max1.y;
+                amax2.x = max2.x;
+                amax2.y = max2.y;
+                amax3.x = max3.x;
+                amax3.y = max3.y;
+                amax4.x = max4.x;
+                amax4.y = max4.y;
+                amaxPerimeter = maxPerimeter;
+
                 Point a = new Point(max1.x, max1.y);
                 points.add(a);
                 a.setBounds(a.x, a.y,a.x + 3, a.y + 3);
@@ -252,155 +257,6 @@ public class Main {
                             pointpane.revalidate();
                             pointpane.repaint();
                         }
-                        double maxPerimeter = 0;
-                        Point max1 = new com.bot.Point();
-                        Point max2 = new com.bot.Point();
-                        Point max3 = new com.bot.Point();
-                        Point max4 = new com.bot.Point();
-
-                        for (int i = 0; i < n; i++) {
-                            for (int j = i + 1; j < n; j++) {
-                                for (int k = j + 1; k < n; k++) {
-                                    for (int t = k + 1; t < n; t++) {
-
-                                        Square s = new Square(q[i], q[j], q[k],q[t]);
-                                        if (s.areSidesEqual1() || s.areSidesEqual2() || s.areSidesEqual3()
-                                                && ((s.b.x - s.a.x) * (s.c.y - s.a.y) != (s.b.y - s.a.y) * (s.c.x - s.a.x))
-                                                && ((s.d.x - s.a.x) * (s.b.y - s.a.y) != (s.d.y - s.a.y) * (s.b.x - s.a.x))
-                                                && ((s.b.x - s.c.x) * (s.c.y - s.d.y) != (s.b.y - s.c.y) * (s.c.x - s.d.x))
-                                                && ((s.d.x - s.c.x) * (s.d.y - s.a.y) != (s.d.y - s.c.y) * (s.d.x - s.a.x))) {
-                                            if (s.getPerimeter() > maxPerimeter) {
-                                                maxPerimeter = s.getPerimeter();
-                                                max1 = new com.bot.Point(s.a.x, s.a.y);
-                                                max2 = new com.bot.Point(s.b.x, s.b.y);
-                                                max3 = new com.bot.Point(s.c.x, s.c.y);
-                                                max4 = new com.bot.Point(s.d.x, s.d.y);
-                                            }
-                                        }
-
-                                    }
-
-                                }
-
-                            }
-                        }
-                        amax1.x = max1.x;
-                        amax1.y = max1.y;
-                        amax2.x = max2.x;
-                        amax2.y = max2.y;
-                        amax3.x = max3.x;
-                        amax3.y = max3.y;
-                        amax4.x = max4.x;
-                        amax4.y = max4.y;
-                        amaxPerimeter = maxPerimeter;
-
-                        Point a = new Point(max1.x, max1.y);
-                        points.add(a);
-                        a.setBounds(a.x, a.y,a.x + 3, a.y + 3);
-                        pointpane.add(a);
-                        pointpane.revalidate();
-                        pointpane.repaint();
-
-                        Point b = new Point(max2.x, max2.y);
-                        points.add(b);
-                        b.setBounds(b.x, b.y, b.x + 3, b.y + 3);
-                        pointpane.add(b);
-                        pointpane.revalidate();
-                        pointpane.repaint();
-
-                        Point c = new Point(max3.x, max3.y);
-                        points.add(c);
-                        c.setBounds(c.x, c.y, c.x + 3, c.y + 3);
-                        pointpane.add(c);
-                        pointpane.revalidate();
-                        pointpane.repaint();
-
-                        Point d = new Point(max4.x, max4.y);
-                        points.add(d);
-                        d.setBounds(d.x, d.y, d.x + 3, d.y + 3);
-                        pointpane.add(d);
-                        pointpane.revalidate();
-                        pointpane.repaint();
-
-                        Square s = new Square (a, b, c, d);
-
-                        if (s.areSidesEqual1() ){
-                            Line temp = new Line(a, b);
-                            lines.add(temp);
-                            pointpane.add(temp);
-                            temp.setBounds(2, 2, frame.getWidth(), frame.getHeight());
-                            pointpane.revalidate();
-                            pointpane.repaint();
-                            Line temp1 = new Line(b, c);
-                            lines.add(temp1);
-                            pointpane.add(temp1);
-                            temp1.setBounds(2, 2, frame.getWidth(), frame.getHeight());
-                            pointpane.revalidate();
-                            pointpane.repaint();
-                            Line temp2 = new Line(c, d);
-                            lines.add(temp2);
-                            pointpane.add(temp2);
-                            temp2.setBounds(2, 2, frame.getWidth(), frame.getHeight());
-                            pointpane.revalidate();
-                            pointpane.repaint();
-                            Line temp3 = new Line(a, d);
-                            lines.add(temp3);
-                            pointpane.add(temp3);
-                            temp3.setBounds(2, 2, frame.getWidth(), frame.getHeight());
-                            pointpane.revalidate();
-                            pointpane.repaint();}
-
-                        if (s.areSidesEqual2()){
-                            Line temp = new Line(a, c);
-                            lines.add(temp);
-                            pointpane.add(temp);
-                            temp.setBounds(2, 2, frame.getWidth(), frame.getHeight());
-                            pointpane.revalidate();
-                            pointpane.repaint();
-                            Line temp1 = new Line(b, c);
-                            lines.add(temp1);
-                            pointpane.add(temp1);
-                            temp1.setBounds(2, 2, frame.getWidth(), frame.getHeight());
-                            pointpane.revalidate();
-                            pointpane.repaint();
-                            Line temp2 = new Line(b, d);
-                            lines.add(temp2);
-                            pointpane.add(temp2);
-                            temp2.setBounds(2, 2, frame.getWidth(), frame.getHeight());
-                            pointpane.revalidate();
-                            pointpane.repaint();
-                            Line temp3 = new Line(a, d);
-                            lines.add(temp3);
-                            pointpane.add(temp3);
-                            temp3.setBounds(2, 2, frame.getWidth(), frame.getHeight());
-                            pointpane.revalidate();
-                            pointpane.repaint();}
-
-                        if (s.areSidesEqual3()){
-                            Line temp = new Line(a, c);
-                            lines.add(temp);
-                            pointpane.add(temp);
-                            temp.setBounds(2, 2, frame.getWidth(), frame.getHeight());
-                            pointpane.revalidate();
-                            pointpane.repaint();
-                            Line temp1 = new Line(d, c);
-                            lines.add(temp1);
-                            pointpane.add(temp1);
-                            temp1.setBounds(2, 2, frame.getWidth(), frame.getHeight());
-                            pointpane.revalidate();
-                            pointpane.repaint();
-                            Line temp2 = new Line(b, d);
-                            lines.add(temp2);
-                            pointpane.add(temp2);
-                            temp2.setBounds(2, 2, frame.getWidth(), frame.getHeight());
-                            pointpane.revalidate();
-                            pointpane.repaint();
-                            Line temp3 = new Line(a, b);
-                            lines.add(temp3);
-                            pointpane.add(temp3);
-                            temp3.setBounds(2, 2, frame.getWidth(), frame.getHeight());
-                            pointpane.revalidate();
-                            pointpane.repaint();}
 
 
 
