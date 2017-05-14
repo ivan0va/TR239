@@ -241,7 +241,7 @@ public class Main {
             }
         });
             JButton readFileBut = new JButton("Читать из файла" );
-            readFileBut.setBounds(2,200,200,40);
+            readFileBut.setBounds(2,200,180,40);
             butPanel.add(readFileBut);
             readFileBut.addActionListener(new ActionListener() {
                 @Override
